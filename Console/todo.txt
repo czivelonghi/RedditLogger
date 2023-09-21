@@ -1,0 +1,51 @@
+fixes:
+- unit test: TestPasswordIsValid
+- rate limiting
+- get todays top posts
+- start/stop  console
+
+test:
+- compare against site
+
+links:
+ - users with most posts: https://www.reddit.com/r/{subreddit}/new.json?limit=100
+ - top posts: https://www.reddit.com/r/{subreddit}/top.json?limit=10
+
+misc cod:
+        //CancellationTokenSource source = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken);
+        //source.CancelAfter(30000); //stop after 30 seconds
+
+//start/stop  console
+using System;
+using System.Threading;
+
+class Program
+{
+    static bool escapePressed = false;
+
+    static void Main(string[] args)
+    {
+        Thread newThread = new Thread(StartListening);
+        newThread.Start();
+
+        while (true)
+        {
+            if (!escapePressed)
+            {
+                // Your code here
+            }
+        }
+    }
+
+    static void StartListening()
+    {
+        while (true)
+        {
+            var key = Console.ReadKey(true);
+            if (key.Key == ConsoleKey.Escape)
+            {
+                escapePressed = !escapePressed;
+            }
+        }
+    }
+}
